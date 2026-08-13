@@ -213,3 +213,143 @@ No additional packages or libraries were required.
 The AI-generated implementation was kept largely unchanged because it matched the requested architecture and passed the manual functionality tests.
 
 The implementation was intentionally kept limited to task creation. Search, filtering, status updates, deletion, and localStorage will be implemented in later development steps.
+
+---
+
+# Prompt 4 — Implement Task Status Updates
+
+> Continue developing the existing "AI Task Manager" React application.
+> 
+> The application currently has working task creation.
+> 
+> The existing components are:
+> 
+> - Header
+> - Dashboard
+> - StatCard
+> - TaskForm
+> - TaskFilters
+> - TaskList
+> - TaskCard
+> 
+> The current task structure is:
+> 
+> {
+>   id: unique-id,
+>   title: "...",
+>   description: "...",
+>   priority: "Low | Medium | High",
+>   status: "Pending | In Progress | Completed",
+>   dueDate: "YYYY-MM-DD"
+> }
+> 
+> ## Goal
+> 
+> Allow users to update the status of an existing task.
+> 
+> The user should be able to change a task's status directly from its task card.
+> 
+> Available statuses:
+> 
+> - Pending
+> - In Progress
+> - Completed
+> 
+> ## Requirements
+> 
+> ### State Management
+> 
+> Keep the main `tasks` state in `App.jsx`.
+> 
+> Create an `updateTaskStatus` function in `App.jsx`.
+> 
+> The function should receive:
+> 
+> - `taskId`
+> - `newStatus`
+> 
+> It should update only the matching task while keeping all other task properties unchanged.
+> 
+> Use the existing `setTasks` state updater.
+> 
+> The data flow should be:
+> 
+> TaskCard
+>     ↓
+> onUpdateStatus(taskId, newStatus)
+>     ↓
+> App.jsx
+>     ↓
+> updateTaskStatus()
+>     ↓
+> setTasks()
+>     ↓
+> tasks state updates
+>     ↓
+> TaskList re-renders
+>     ↓
+> Dashboard statistics recalculate
+> 
+> ### TaskCard
+> 
+> Update `TaskCard.jsx` so that the user can select a different status.
+> 
+> Add a status `<select>` control to the task card.
+> 
+> The select should:
+> 
+> - Display the task's current status.
+> - Include Pending, In Progress, and Completed options.
+> - Call the status update callback when the selection changes.
+> 
+> Use controlled input behavior:
+> 
+> ```jsx
+> value={task.status}
+
+---
+
+## Prompt 4 — Human Review and Testing
+
+The AI-generated implementation was reviewed before being added to the project.
+
+### Accepted Changes
+
+The implementation correctly:
+
+- Added `updateTaskStatus()` to `App.jsx`.
+- Used immutable state updates with `map()`.
+- Kept the main task state in `App.jsx`.
+- Passed the status update callback from `App.jsx` to `TaskList`.
+- Passed the callback from `TaskList` to `TaskCard`.
+- Added a controlled status dropdown to each task card.
+- Preserved the existing task properties when changing status.
+- Automatically recalculated dashboard statistics from the updated task state.
+- Kept the existing task creation functionality working.
+
+### Testing
+
+The status update functionality was tested manually in the browser.
+
+Tested successfully:
+
+- Changing a task from Pending to Completed.
+- Changing a task from Completed to In Progress.
+- Dashboard counts updating after a status change.
+- Task title remaining unchanged.
+- Task description remaining unchanged.
+- Task priority remaining unchanged.
+- Task due date remaining unchanged.
+- Creating a new task after implementing status updates.
+- New tasks still receiving Pending status.
+
+Refreshing the browser resets the application to the sample tasks because localStorage has not been implemented yet. This is intentional.
+
+### Human Decision
+
+The AI-generated implementation was kept unchanged because it followed the requested architecture, used immutable state updates, and passed the manual tests.
+
+No additional libraries or functionality were introduced.
+
+--- 
+

@@ -46,6 +46,16 @@ function App() {
     setTasks((currentTasks) => [...currentTasks, newTask]);
   };
 
+  const updateTaskStatus = (taskId, newStatus) => {
+    setTasks((currentTasks) =>
+      currentTasks.map((task) =>
+        task.id === taskId
+          ? { ...task, status: newStatus }
+          : task
+      )
+    );
+  };
+
   const completedTasks = tasks.filter(
     (task) => task.status === "Completed"
   ).length;
@@ -82,7 +92,10 @@ function App() {
 
           <TaskFilters />
 
-          <TaskList tasks={tasks} />
+          <TaskList
+            tasks={tasks}
+            onUpdateStatus={updateTaskStatus}
+          />
         </section>
       </main>
     </div>
