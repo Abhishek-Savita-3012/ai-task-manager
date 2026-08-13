@@ -127,3 +127,89 @@ I removed unnecessary Vite demo styles such as `color-scheme`, the default dark 
 The application was then retested in the browser to confirm that the UI displayed correctly.
 
 ---
+
+# Prompt 3 — Implement Task Creation
+
+> Continue developing the existing "AI Task Manager" React application.
+> 
+> The application was previously built with React, Vite, JavaScript, and plain CSS.
+> 
+> The current application already contains these reusable components:
+> 
+> - Header
+> - Dashboard
+> - StatCard
+> - TaskForm
+> - TaskFilters
+> - TaskList
+> - TaskCard
+> 
+> The current UI displays sample tasks, but the task creation form is currently static.
+> 
+> ## Goal
+> 
+> Make the "Add New Task" form functional.
+> 
+> When the user fills out the form and clicks "Add Task":
+> 
+> 1. A new task should be created.
+> 2. The new task should be added to the existing tasks state in `App.jsx`.
+> 3. The new task should immediately appear in the task list.
+> 4. Dashboard statistics should automatically update.
+> 5. The form should reset after successful submission.
+> 
+> ## Requirements
+> 
+> ### State Management
+> 
+> Keep the main `tasks` state in `App.jsx`.
+> 
+> Change the existing state from:
+> 
+> ```jsx
+> const [tasks] = useState(sampleTasks);
+
+---
+
+## Prompt 3 — Human Review and Testing
+
+The AI-generated implementation was reviewed before being added to the project.
+
+### Accepted Changes
+
+The implementation correctly:
+
+- Moved task state ownership to `App.jsx`.
+- Added the `setTasks` state updater.
+- Created an `addTask()` function in `App.jsx`.
+- Passed `addTask` to `TaskForm` through props.
+- Converted `TaskForm` into a controlled React form.
+- Added basic title validation.
+- Created new tasks with a `Pending` status.
+- Reset the form after successful submission.
+- Automatically updated dashboard statistics from the tasks state.
+- Kept the existing component structure and CSS unchanged.
+
+### Testing
+
+The task creation feature was tested manually in the browser.
+
+Tested successfully:
+
+- Creating a new task.
+- Entering a task title and description.
+- Selecting Low, Medium, and High priority.
+- Selecting a due date.
+- New tasks appearing immediately in the task list.
+- Dashboard task counts updating automatically.
+- New tasks receiving `Pending` status.
+- Form resetting after successful submission.
+- Preventing submission when the task title is empty.
+
+No additional packages or libraries were required.
+
+### Human Decision
+
+The AI-generated implementation was kept largely unchanged because it matched the requested architecture and passed the manual functionality tests.
+
+The implementation was intentionally kept limited to task creation. Search, filtering, status updates, deletion, and localStorage will be implemented in later development steps.

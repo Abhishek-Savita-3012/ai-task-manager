@@ -34,7 +34,17 @@ const sampleTasks = [
 ];
 
 function App() {
-  const [tasks] = useState(sampleTasks);
+  const [tasks, setTasks] = useState(sampleTasks);
+
+  const addTask = (taskData) => {
+    const newTask = {
+      id: Date.now(),
+      ...taskData,
+      status: "Pending",
+    };
+
+    setTasks((currentTasks) => [...currentTasks, newTask]);
+  };
 
   const completedTasks = tasks.filter(
     (task) => task.status === "Completed"
@@ -68,7 +78,7 @@ function App() {
             </div>
           </div>
 
-          <TaskForm />
+          <TaskForm onAddTask={addTask} />
 
           <TaskFilters />
 
