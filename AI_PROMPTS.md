@@ -50,15 +50,12 @@ The response was used as a starting point for deciding:
 
 The proposed structure was reviewed before implementation, and changes were made where necessary.
 
----
-
 ## AI Assistance
 
 AI was used as a development assistant rather than as an automatic code generator. The generated suggestions were reviewed and adapted during implementation.
 
 Future prompts used during development will be added to this file as the application progresses.
 
----
 
 ## Prompt 1 — AI Response Summary
 
@@ -68,8 +65,6 @@ The proposed architecture uses `App.jsx` as the main container for shared task s
 
 The AI also recommended using localStorage with `useEffect` for task persistence.
 
----
-
 ### Human Review and Decision
 
 After reviewing the AI-generated architecture, I decided to simplify and clarify the component responsibilities.
@@ -77,3 +72,58 @@ After reviewing the AI-generated architecture, I decided to simplify and clarify
 The final structure separates `TaskFilters` from `Dashboard`. `Dashboard` is responsible only for displaying task statistics, while `TaskFilters` handles search, status filtering, and priority filtering.
 
 I also decided not to introduce unnecessary folders such as `hooks`, `context`, `services`, or `reducers` because the application's current complexity does not require them.
+
+---
+
+## Prompt 2 — Basic React Application Structure
+
+> Create the basic UI structure for the "AI Task Manager" based on the reviewed architecture.
+> 
+> Use React, Vite, JavaScript, and plain CSS.
+> 
+> Create these reusable components:
+> 
+> - Header
+> - Dashboard
+> - StatCard
+> - TaskForm
+> - TaskFilters
+> - TaskList
+> - TaskCard
+> 
+> Requirements:
+> 
+> - Keep App.jsx responsible for shared application state.
+> - Use functional React components.
+> - Use JSX.
+> - Use sample task data for now.
+> - Do not implement localStorage yet.
+> - Do not implement search/filter functionality yet.
+> - Do not implement task creation, deletion, or status updates yet.
+> - Do not install additional libraries.
+> - Use plain CSS.
+> - Make the initial layout responsive.
+> - Keep components small and readable.
+> - Do not create unnecessary folders or abstractions.
+> 
+> First explain which files will be created or modified. Then implement the basic UI.
+> 
+> Do not modify package.json unless absolutely necessary.
+
+---
+
+## Prompt 2 — Human Review and Manual Improvement
+
+After implementing the AI-generated UI, I tested the application in the browser.
+
+The main component structure and functionality of the static UI worked as expected. However, the original Vite `index.css` contained default styles that conflicted with the application's custom styling. This caused some headings to appear with very low contrast and affected the overall layout.
+
+### Manual Improvement
+
+I replaced the default Vite `index.css` styles with a minimal global stylesheet appropriate for the AI Task Manager.
+
+I removed unnecessary Vite demo styles such as `color-scheme`, the default dark background, and the `#root` padding/text alignment.
+
+The application was then retested in the browser to confirm that the UI displayed correctly.
+
+---
