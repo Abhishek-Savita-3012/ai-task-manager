@@ -686,3 +686,128 @@ No additional libraries were required.
 
 ---
 
+# Prompt 8 — Implement localStorage Persistence
+
+> Continue developing the existing "AI Task Manager" React application.
+> 
+> The application currently has:
+> 
+> - Working task creation
+> - Working task status updates
+> - Working task deletion
+> - Working task search
+> - Working Status filtering
+> - Working Priority filtering
+> - Combined Search + Status + Priority filtering
+> - Dashboard statistics
+> 
+> ## Goal
+> 
+> Implement browser `localStorage` persistence for tasks.
+> 
+> After this change:
+> 
+> 1. Existing tasks should be loaded from `localStorage` when the application starts.
+> 2. Whenever the `tasks` state changes, the updated tasks should be saved to `localStorage`.
+> 3. Creating a task should persist after refreshing the browser.
+> 4. Updating task status should persist after refreshing.
+> 5. Deleting a task should persist after refreshing.
+> 6. Search and filters should continue working.
+> 7. Dashboard statistics should continue using the complete `tasks` state.
+> 
+> Do not introduce a backend, database, authentication, or any new package.
+> 
+> ---
+> 
+> # 1. App.jsx
+> 
+> Use React's existing `useState` and add `useEffect`.
+> 
+> Change:
+> 
+> ```jsx
+> import { useState } from "react";
+
+---
+
+## Prompt 8 — Human Review and Testing
+
+The AI-generated implementation was reviewed before being added to the project.
+
+### Accepted Changes
+
+The implementation correctly:
+
+- Added `useEffect` for task persistence.
+- Added a dedicated `STORAGE_KEY` for the application.
+- Loads tasks from browser `localStorage` during initial state creation.
+- Uses `sampleTasks` when no saved tasks exist.
+- Uses `JSON.parse()` to restore saved tasks.
+- Uses `JSON.stringify()` to save the complete tasks array.
+- Saves tasks whenever the `tasks` state changes.
+- Preserves task creation functionality.
+- Preserves task status updates.
+- Preserves task deletion.
+- Keeps Search, Status, and Priority filters working.
+- Keeps search and filter state temporary rather than persisting it.
+- Keeps `filteredTasks` as derived data.
+- Keeps Dashboard statistics based on the complete `tasks` state.
+- Handles invalid localStorage data using a fallback to `sampleTasks`.
+- Does not introduce any additional packages or unnecessary architecture.
+
+### Persistence Flow
+
+The application now follows this flow:
+
+    Application starts
+          ↓
+    Read localStorage
+          ↓
+    Saved tasks exist?
+       /       \
+     Yes        No
+      ↓          ↓
+    Load       sampleTasks
+      \          /
+       ↓        ↓
+        tasks state
+             ↓
+       User changes tasks
+             ↓
+         setTasks()
+             ↓
+        useEffect()
+             ↓
+       localStorage updated
+
+### Testing
+
+The persistence functionality was manually tested in the browser.
+
+Tested successfully:
+
+- Loading the application with no saved tasks.
+- Creating a new task.
+- Refreshing the browser after creating a task.
+- Confirming the created task remains after refresh.
+- Updating a task status.
+- Refreshing after a status update.
+- Confirming the updated status remains after refresh.
+- Deleting a task.
+- Refreshing after deletion.
+- Confirming the deleted task does not return.
+- Searching persisted tasks.
+- Applying Status and Priority filters to persisted tasks.
+- Confirming Dashboard statistics remain based on the complete tasks collection.
+- Testing invalid localStorage data and confirming the application falls back safely to sample tasks.
+
+### Human Decision
+
+The AI-generated implementation was accepted after manual testing confirmed that task data persists correctly across browser refreshes.
+
+The implementation intentionally persists only the `tasks` array. Search terms and filter selections remain temporary UI state.
+
+No backend, database, authentication, or additional packages were introduced.
+
+---
+

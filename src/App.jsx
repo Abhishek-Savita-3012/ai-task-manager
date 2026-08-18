@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Dashboard from "./components/Dashboard";
 import TaskForm from "./components/TaskForm";
@@ -33,11 +33,31 @@ const sampleTasks = [
   },
 ];
 
+const STORAGE_KEY = "ai-task-manager-tasks";
+
 function App() {
-  const [tasks, setTasks] = useState(sampleTasks);
+  const [tasks, setTasks] = useState(() => {
+  try {
+    const savedTasks = localStorage.getItem(STORAGE_KEY);
+
+    if (savedTasks) {
+      return JSON.parse(savedTasks);
+    }
+
+    return sampleTasks;
+  } catch (error) {
+    console.error("Failed to load tasks from localStorage:", error);
+    return sampleTasks;
+  }
+});
+
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [priorityFilter, setPriorityFilter] = useState("All");
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+  }, [tasks]);
 
   const addTask = (taskData) => {
     const newTask = {
