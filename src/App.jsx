@@ -36,6 +36,8 @@ const sampleTasks = [
 function App() {
   const [tasks, setTasks] = useState(sampleTasks);
   const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All");
+  const [priorityFilter, setPriorityFilter] = useState("All");
 
   const addTask = (taskData) => {
     const newTask = {
@@ -66,10 +68,17 @@ function App() {
   const filteredTasks = tasks.filter((task) => {
     const searchValue = searchTerm.toLowerCase().trim();
 
-    return (
+    const matchesSearch =
       task.title.toLowerCase().includes(searchValue) ||
-      task.description.toLowerCase().includes(searchValue)
-    );
+      task.description.toLowerCase().includes(searchValue);
+
+    const matchesStatus =
+      statusFilter === "All" || task.status === statusFilter;
+
+    const matchesPriority =
+      priorityFilter === "All" || task.priority === priorityFilter;
+
+    return matchesSearch && matchesStatus && matchesPriority;
   });
 
   const completedTasks = tasks.filter(
@@ -109,6 +118,10 @@ function App() {
           <TaskFilters
             searchTerm={searchTerm}
             onSearchChange={setSearchTerm}
+            statusFilter={statusFilter}
+            onStatusChange={setStatusFilter}
+            priorityFilter={priorityFilter}
+            onPriorityChange={setPriorityFilter}
           />
 
           <TaskList

@@ -553,3 +553,136 @@ The implementation was intentionally limited to search functionality. Status fil
 No additional libraries were required.
 
 ---
+
+# Prompt 7 — Implement Status and Priority Filters
+
+> Continue developing the existing "AI Task Manager" React application.
+> 
+> The application currently has:
+> 
+> - Working task creation
+> - Working task status updates
+> - Working task deletion
+> - Working task search
+> - Dashboard statistics
+> - Static Status and Priority filter dropdowns
+> 
+> The existing components are:
+> 
+> - Header
+> - Dashboard
+> - StatCard
+> - TaskForm
+> - TaskFilters
+> - TaskList
+> - TaskCard
+> 
+> The current task structure is:
+> 
+> {
+>   id: unique-id,
+>   title: "...",
+>   description: "...",
+>   status: "Pending | In Progress | Completed",
+>   priority: "Low | Medium | High",
+>   dueDate: "YYYY-MM-DD"
+> }
+> 
+> ## Goal
+> 
+> Make the existing Status and Priority dropdowns functional.
+> 
+> Search, Status, and Priority filters must work together.
+> 
+> For example:
+> 
+> Search = "project"
+> Status = "Pending"
+> Priority = "High"
+> 
+> The displayed task must satisfy ALL three conditions.
+> 
+> ## Requirements
+> 
+> ### State Management
+> 
+> Keep filter state in `App.jsx`.
+> 
+> Add:
+> 
+> ```jsx
+> const [statusFilter, setStatusFilter] = useState("All");
+> const [priorityFilter, setPriorityFilter] = useState("All");
+
+---
+
+## Prompt 7 — Human Review and Testing
+
+The AI-generated implementation was reviewed before being added to the project.
+
+### Accepted Changes
+
+The implementation correctly:
+
+- Added `statusFilter` state in `App.jsx`.
+- Added `priorityFilter` state in `App.jsx`.
+- Converted the Status dropdown into a controlled input.
+- Converted the Priority dropdown into a controlled input.
+- Preserved the existing search functionality.
+- Combined Search, Status, and Priority using AND logic.
+- Allowed each dropdown to use `All` to disable that filter.
+- Kept the original `tasks` array as the single source of truth.
+- Used `filteredTasks` as derived data rather than storing it in state.
+- Kept Dashboard statistics based on the complete `tasks` array.
+- Preserved task creation, status updates, and deletion.
+- Did not introduce any new packages or unnecessary architecture.
+
+### Filtering Logic
+
+The displayed tasks are calculated using:
+
+- Search match
+- Status match
+- Priority match
+
+A task is displayed only when all active conditions are satisfied.
+
+Conceptually:
+
+    Search match
+          AND
+    Status match
+          AND
+    Priority match
+
+If Status or Priority is set to `All`, that filter does not restrict the results.
+
+### Testing
+
+The filtering functionality was manually tested in the browser.
+
+Tested successfully:
+
+- Search filtering.
+- Status filtering.
+- Priority filtering.
+- Search + Status filtering.
+- Search + Priority filtering.
+- Status + Priority filtering.
+- Search + Status + Priority filtering.
+- Resetting filters to `All`.
+- Creating a task while filters are active.
+- Updating task status while filters are active.
+- Deleting tasks while filters are active.
+- Dashboard statistics remaining based on all tasks rather than filtered tasks.
+
+### Human Decision
+
+The AI-generated implementation was accepted because it followed the requested architecture and passed the manual functionality tests.
+
+The implementation was intentionally limited to Search, Status, and Priority filtering. LocalStorage, backend functionality, authentication, sorting, pagination, and other unrelated features were not introduced.
+
+No additional libraries were required.
+
+---
+

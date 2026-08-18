@@ -1,4 +1,11 @@
-function TaskFilters({ searchTerm, onSearchChange }) {
+function TaskFilters({
+  searchTerm,
+  onSearchChange,
+  statusFilter,
+  onStatusChange,
+  priorityFilter,
+  onPriorityChange,
+}) {
   return (
     <section className="task-filters">
       <div className="filter-group">
@@ -16,7 +23,11 @@ function TaskFilters({ searchTerm, onSearchChange }) {
       <div className="filter-group">
         <label htmlFor="status-filter">Status</label>
 
-        <select id="status-filter" defaultValue="All">
+        <select
+          id="status-filter"
+          value={statusFilter}
+          onChange={(event) => onStatusChange(event.target.value)}
+        >
           <option value="All">All Statuses</option>
           <option value="Pending">Pending</option>
           <option value="In Progress">In Progress</option>
@@ -27,7 +38,11 @@ function TaskFilters({ searchTerm, onSearchChange }) {
       <div className="filter-group">
         <label htmlFor="priority-filter">Priority</label>
 
-        <select id="priority-filter" defaultValue="All">
+        <select
+          id="priority-filter"
+          value={priorityFilter}
+          onChange={(event) => onPriorityChange(event.target.value)}
+        >
           <option value="All">All Priorities</option>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
