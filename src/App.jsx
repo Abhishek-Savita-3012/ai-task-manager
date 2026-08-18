@@ -35,6 +35,7 @@ const sampleTasks = [
 
 function App() {
   const [tasks, setTasks] = useState(sampleTasks);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const addTask = (taskData) => {
     const newTask = {
@@ -61,6 +62,15 @@ function App() {
       currentTasks.filter((task) => task.id !== taskId)
     );
   };
+
+  const filteredTasks = tasks.filter((task) => {
+    const searchValue = searchTerm.toLowerCase().trim();
+
+    return (
+      task.title.toLowerCase().includes(searchValue) ||
+      task.description.toLowerCase().includes(searchValue)
+    );
+  });
 
   const completedTasks = tasks.filter(
     (task) => task.status === "Completed"
@@ -96,10 +106,13 @@ function App() {
 
           <TaskForm onAddTask={addTask} />
 
-          <TaskFilters />
+          <TaskFilters
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+          />
 
           <TaskList
-            tasks={tasks}
+            tasks={filteredTasks}
             onUpdateStatus={updateTaskStatus}
             onDeleteTask={deleteTask}
           />

@@ -1,17 +1,21 @@
-function TaskFilters() {
+function TaskFilters({ searchTerm, onSearchChange }) {
   return (
     <section className="task-filters">
       <div className="filter-group">
         <label htmlFor="search">Search</label>
+
         <input
           id="search"
           type="text"
           placeholder="Search tasks..."
+          value={searchTerm}
+          onChange={(event) => onSearchChange(event.target.value)}
         />
       </div>
 
       <div className="filter-group">
         <label htmlFor="status-filter">Status</label>
+
         <select id="status-filter" defaultValue="All">
           <option value="All">All Statuses</option>
           <option value="Pending">Pending</option>
@@ -22,6 +26,7 @@ function TaskFilters() {
 
       <div className="filter-group">
         <label htmlFor="priority-filter">Priority</label>
+
         <select id="priority-filter" defaultValue="All">
           <option value="All">All Priorities</option>
           <option value="Low">Low</option>

@@ -446,3 +446,110 @@ Refreshing the browser restores the sample tasks because localStorage has not be
 The AI-generated implementation was kept unchanged because it followed the requested architecture, used immutable state updates, and passed the manual functionality tests.
 
 No additional libraries or unrelated functionality were introduced.
+
+---
+
+# Prompt 6 — Implement Task Search
+
+> Continue developing the existing "AI Task Manager" React application.
+>
+> The application currently has:
+> 
+> - Working task creation
+> - Working task status updates
+> - Working task deletion
+> - Dashboard statistics
+> - A static search input
+> 
+> The existing components are:
+> 
+> - Header
+> - Dashboard
+> - StatCard
+> - TaskForm
+> - TaskFilters
+> - TaskList
+> - TaskCard
+> 
+> The current task structure is:
+> 
+> {
+>   id: unique-id,
+>   title: "...",
+>   description: "...",
+>   status: "Pending | In Progress | Completed",
+>   priority: "Low | Medium | High",
+>   dueDate: "YYYY-MM-DD"
+> }
+> 
+> ## Goal
+> 
+> Make the existing search input functional.
+> 
+> Users should be able to search tasks by:
+> 
+> - Task title
+> - Task description
+> 
+> Search results should update as the user types.
+> 
+> ## Requirements
+> 
+> ### State Management
+> 
+> Keep the search state in `App.jsx`.
+> 
+> Add:
+> 
+> ```jsx
+> const [searchTerm, setSearchTerm] = useState("");
+
+---
+
+## Prompt 6 — Human Review and Testing
+
+The AI-generated implementation was reviewed before being added to the project.
+
+### Accepted Changes
+
+The implementation correctly:
+
+- Added `searchTerm` state in `App.jsx`.
+- Made the existing search input a controlled React input.
+- Passed the search value and change handler through props.
+- Created `filteredTasks` from the original `tasks` state.
+- Used `filter()` for task searching.
+- Implemented case-insensitive searching.
+- Supported partial text matches.
+- Searched both task titles and descriptions.
+- Kept the original `tasks` array as the source of truth.
+- Kept dashboard statistics based on all tasks rather than filtered results.
+- Preserved task creation, status updates, and deletion functionality.
+- Kept the existing component structure and styling.
+
+### Testing
+
+The search functionality was tested manually in the browser.
+
+Tested successfully:
+
+- Searching by task title.
+- Searching by task description.
+- Case-insensitive searches.
+- Partial text searches.
+- Clearing the search and displaying all tasks.
+- Searching for text with no matching tasks.
+- Dashboard statistics remaining based on the total task collection.
+- Creating a task while search functionality is enabled.
+- Updating task status while search functionality is enabled.
+- Deleting a task while search functionality is enabled.
+
+### Human Decision
+
+The AI-generated implementation was accepted because it followed the requested architecture and passed the manual functionality tests.
+
+The implementation was intentionally limited to search functionality. Status filtering, priority filtering, localStorage, and other features were not introduced at this stage.
+
+No additional libraries were required.
+
+---
