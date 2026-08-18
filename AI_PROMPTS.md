@@ -353,3 +353,96 @@ No additional libraries or functionality were introduced.
 
 --- 
 
+# Prompt 5 — Implement Task Deletion
+
+> Continue developing the existing "AI Task Manager" React application.
+> 
+> The application currently has:
+> 
+> - Working task creation
+> - Working task status updates
+> - Dashboard statistics
+> - Static search and filter controls
+> 
+> The existing components are:
+> 
+> - Header
+> - Dashboard
+> - StatCard
+> - TaskForm
+> - TaskFilters
+> - TaskList
+> - TaskCard
+> 
+> The current task structure is:
+> 
+> {
+>   id: unique-id,
+>   title: "...",
+>   description: "...",
+>   status: "Pending | In Progress | Completed",
+>   priority: "Low | Medium | High",
+>   dueDate: "YYYY-MM-DD"
+> }
+> 
+> ## Goal
+> 
+> Allow users to delete an existing task.
+> 
+> The user should be able to delete a task directly from its task card.
+> 
+> ## Requirements
+> 
+> ### State Management
+> 
+> Keep the main `tasks` state in `App.jsx`.
+> 
+> Create a `deleteTask` function in `App.jsx`.
+> 
+> The function should receive:
+> 
+> ```text
+> taskId
+
+---
+
+## Prompt 5 — Human Review and Testing
+
+The AI-generated implementation was reviewed before being added to the project.
+
+### Accepted Changes
+
+The implementation correctly:
+
+- Added `deleteTask()` to `App.jsx`.
+- Used `filter()` for an immutable task deletion.
+- Passed the delete callback from `App.jsx` to `TaskList`.
+- Passed the delete callback from `TaskList` to `TaskCard`.
+- Added a Delete button to each task card.
+- Kept the existing status update functionality working.
+- Kept the existing task creation functionality working.
+- Automatically recalculated dashboard statistics after deletion.
+- Added simple styling for the Delete button.
+
+### Testing
+
+The task deletion functionality was tested manually in the browser.
+
+Tested successfully:
+
+- Deleting an existing task.
+- The deleted task disappearing from the task list.
+- Total task count decreasing after deletion.
+- The corresponding status count decreasing after deletion.
+- Other tasks remaining unchanged.
+- Creating a new task after implementing deletion.
+- Updating task status after implementing deletion.
+- Existing task information remaining intact.
+
+Refreshing the browser restores the sample tasks because localStorage has not been implemented yet. This is intentional.
+
+### Human Decision
+
+The AI-generated implementation was kept unchanged because it followed the requested architecture, used immutable state updates, and passed the manual functionality tests.
+
+No additional libraries or unrelated functionality were introduced.

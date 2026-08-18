@@ -1,6 +1,6 @@
 import TaskCard from "./TaskCard";
 
-function TaskList({ tasks, onUpdateStatus }) {
+function TaskList({ tasks, onUpdateStatus, onDeleteTask }) {
   return (
     <section className="task-list">
       {tasks.map((task) => (
@@ -8,6 +8,7 @@ function TaskList({ tasks, onUpdateStatus }) {
           key={task.id}
           task={task}
           onUpdateStatus={onUpdateStatus}
+          onDeleteTask={onDeleteTask}
         />
       ))}
     </section>

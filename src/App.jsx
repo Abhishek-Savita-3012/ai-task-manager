@@ -56,6 +56,12 @@ function App() {
     );
   };
 
+  const deleteTask = (taskId) => {
+    setTasks((currentTasks) =>
+      currentTasks.filter((task) => task.id !== taskId)
+    );
+  };
+
   const completedTasks = tasks.filter(
     (task) => task.status === "Completed"
   ).length;
@@ -95,6 +101,7 @@ function App() {
           <TaskList
             tasks={tasks}
             onUpdateStatus={updateTaskStatus}
+            onDeleteTask={deleteTask}
           />
         </section>
       </main>

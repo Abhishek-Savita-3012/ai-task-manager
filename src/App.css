@@ -234,6 +234,20 @@ textarea {
   color: #6b7280;
 }
 
+.delete-button {
+  border: none;
+  border-radius: 7px;
+  padding: 8px 12px;
+  background: #fee2e2;
+  color: #b91c1c;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.delete-button:hover {
+  background: #fecaca;
+}
+
 /* Responsive */
 
 @media (max-width: 800px) {

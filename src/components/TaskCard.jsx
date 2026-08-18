@@ -1,6 +1,10 @@
-function TaskCard({ task, onUpdateStatus }) {
+function TaskCard({ task, onUpdateStatus, onDeleteTask }) {
   const handleStatusChange = (event) => {
     onUpdateStatus(task.id, event.target.value);
+  };
+
+  const handleDelete = () => {
+    onDeleteTask(task.id);
   };
 
   return (
@@ -28,6 +32,14 @@ function TaskCard({ task, onUpdateStatus }) {
         </select>
 
         <span className="due-date">Due: {task.dueDate}</span>
+
+        <button
+          type="button"
+          className="delete-button"
+          onClick={handleDelete}
+        >
+          Delete
+        </button>
       </div>
     </article>
   );
